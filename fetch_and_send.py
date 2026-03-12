@@ -210,8 +210,8 @@ def build_html_email(articles):
 
 def send_email(subject, html_body):
     """Gmail SMTPでメール送信"""
-    gmail_address = os.environ.get("GMAIL_ADDRESS")
-    gmail_app_password = os.environ.get("GMAIL_APP_PASSWORD")
+    gmail_address = os.environ.get("GMAIL_ADDRESS", "").strip()
+    gmail_app_password = os.environ.get("GMAIL_APP_PASSWORD", "").replace(" ", "").replace("\u00a0", "").strip()
 
     if not gmail_address or not gmail_app_password:
         raise ValueError("GMAIL_ADDRESS と GMAIL_APP_PASSWORD を環境変数に設定してください")
